@@ -1,6 +1,6 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tes
 
-name: Node.js CI
+name: Build test deploy
 
 on:
   push:
@@ -23,6 +23,8 @@ jobs:
         node-version: 23
     - name: Instal MPN Modules    
       run: npm install
+    - name: Replace the backend enpoint
+      run: echo "export const settings = {host:\"https://localhost:3030\"}" > src/config.js
     - name: Start Backend
       run: npm run server-be &
     - name: Start Frontend
